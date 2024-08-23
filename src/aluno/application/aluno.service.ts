@@ -6,6 +6,8 @@ import {
 import { CreateAlunoCommand } from './commands/create-aluno-command';
 import { AlunoRepository } from './ports/aluno.repository';
 import { AlunoFactory } from '../domain/factories/aluno-factory';
+import { Aluno } from '../domain/aluno';
+import { Curso } from 'src/curso/dominio/curso';
 
 @Injectable()
 export class AlunoService {
@@ -50,5 +52,9 @@ export class AlunoService {
 
   listar() {
     return this.alunoRepository.listar();
+  }
+
+  matricular(aluno: Aluno, curso: Curso){
+
   }
 }
