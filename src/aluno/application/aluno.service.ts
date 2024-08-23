@@ -8,12 +8,14 @@ import { AlunoRepository } from './ports/aluno.repository';
 import { AlunoFactory } from '../domain/factories/aluno-factory';
 import { Aluno } from '../domain/aluno';
 import { Curso } from 'src/curso/dominio/curso';
+import { LocalCursoRepository } from 'src/curso/infraestrutura/persistencia/local/curso.repository';
 
 @Injectable()
 export class AlunoService {
   constructor(
     private readonly alunoRepository: AlunoRepository,
     private readonly alunoFactory: AlunoFactory,
+    private readonly cursoRepository: LocalCursoRepository
   ) {}
 
   cadastrar(createAlunoCommand: CreateAlunoCommand) {
@@ -54,7 +56,10 @@ export class AlunoService {
     return this.alunoRepository.listar();
   }
 
-  matricular(aluno: Aluno, curso: Curso){
+  matricular(aluno: Aluno, curso: Curso):void{
+    const cursoId = this.cursoRepository.buscarCursoId(curso.id)
+
+    aluno.cursos.push(cursoId)
 
   }
 }
