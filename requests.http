@@ -1,0 +1,6 @@
+### Alunos
+
+POST http://localhost:3000/alunos
+Content-Type: application/json
+
+{"nome": "Mariana"}
